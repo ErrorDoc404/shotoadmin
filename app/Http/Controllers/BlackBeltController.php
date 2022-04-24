@@ -14,7 +14,7 @@ class BlackBeltController extends Controller
      */
     public function index()
     {
-        //
+        return view('blackbelt.index');
     }
 
     /**
