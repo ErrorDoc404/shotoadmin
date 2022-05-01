@@ -14,7 +14,8 @@ class BlackBeltController extends Controller
      */
     public function index()
     {
-        return view('blackbelt.index');
+        $blackbelt = BlackBelt::all();
+        return view('blackbelt.index',compact('blackbelt'));
     }
 
     /**
@@ -24,7 +25,7 @@ class BlackBeltController extends Controller
      */
     public function create()
     {
-        //
+        return false;
     }
 
     /**
@@ -35,7 +36,7 @@ class BlackBeltController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return false;
     }
 
     /**
@@ -46,7 +47,7 @@ class BlackBeltController extends Controller
      */
     public function show(BlackBelt $blackBelt)
     {
-        //
+        return false;
     }
 
     /**
@@ -57,7 +58,7 @@ class BlackBeltController extends Controller
      */
     public function edit(BlackBelt $blackBelt)
     {
-        //
+        return false;
     }
 
     /**
@@ -69,7 +70,7 @@ class BlackBeltController extends Controller
      */
     public function update(Request $request, BlackBelt $blackBelt)
     {
-        //
+        return false;
     }
 
     /**
@@ -80,6 +81,6 @@ class BlackBeltController extends Controller
      */
     public function destroy(BlackBelt $blackBelt)
     {
-        //
+        return false;
     }
 }

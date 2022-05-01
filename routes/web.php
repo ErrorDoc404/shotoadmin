@@ -25,6 +25,8 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/blackbelt', [BlackBeltController::class, 'index'])->middleware(['auth'])->name('blackbelt');
+Route::get('/blackbelt/{id}', [BlackBeltController::class, 'show'])->middleware(['auth'])->name('blackbelt.view');
+Route::get('/blackbelt/{id}/edit', [BlackBeltController::class, 'edit'])->middleware(['auth'])->name('blackbelt.edit');
 
 Route::get('/profile', [UserSettingController::class, 'index'])->middleware(['auth'])->name('profile');
 
