@@ -167,7 +167,7 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{route('dashboard')}}" class="nav-link active">
+                        <a href="{{route('dashboard')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -198,12 +198,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Create</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Black Belt</li>
+                            <li class="breadcrumb-item active">Create</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -211,78 +212,89 @@
         </div>
         <!-- /.content-header -->
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>
-                                    Storage
-                                </h3>
+        <!-- general form elements disabled -->
+        <div class="card card-secondary mr-5 ml-5">
+            <div class="card-header">
+                <h3 class="card-title">Custom Elements</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <form class="form-horizontal" method="POST" action="{{ route('blackbelt.store') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
 
-                                <p>Storage left</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-server"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="form-group{{ $errors->has('fullname') ? ' has-error' : '' }}">
+                        <label for="email" class="col-md-4 control-label">Full Name</label>
+
+                        <div class="col-md-6">
+                            <input id="fullname" type="text" class="form-control" name="fullname" value="{{ old('fullname') }}" required>
+
+                            @if ($errors->has('fullname'))
+                                <span class="help-block">
+                                                <strong>{{ $errors->first('fullname') }}</strong>
+                                            </span>
+                            @endif
                         </div>
                     </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                                <p>Bounce Rate</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="form-group{{ $errors->has('dan') ? ' has-error' : '' }}">
+                        <label for="email" class="col-md-4 control-label">Dan</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" id="dan" name="dan" required val="{{ old('dan') }}">
+                                <option value="">--- SELECT ---</option>
+                                <option value="1">Black Belt 1st Dan</option>
+                                <option value="2">Black Belt 2nd Dan</option>
+                                <option value="3">Black Belt 3rd Dan</option>
+                                <option value="4">Black Belt 4th Dan</option>
+                                <option value="5">Black Belt 5th Dan</option>
+                                <option value="6">Black Belt 6th Dan</option>
+                                <option value="7">Black Belt 7th Dan</option>
+                                <option value="8">Black Belt 8th Dan</option>
+                                <option value="9">Black Belt 9th Dan</option>
+                                <option value="10">Black Belt 10th Dan</option>
+                            </select>
+
+                            @if ($errors->has('dan'))
+                                <span class="help-block">
+                                                <strong>{{ $errors->first('dan') }}</strong>
+                                            </span>
+                            @endif
                         </div>
                     </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>44</h3>
 
-                                <p>User Registrations</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+                        <label for="year" class="col-md-4 control-label">Year</label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" id="year" name="year">
+                                <option value="">--- SELECT ---</option>
+                                @foreach($year as $y)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
 
-                                <p>Unique Visitors</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
-                            </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                        <label for="email" class="col-md-4 control-label">Image</label>
+
+                        <div class="col-md-6">
+                            <input id="name" type="file" class="form-control" name="name"  />
                         </div>
                     </div>
-                    <!-- ./col -->
-                </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
     </div>
     <!-- /.content-wrapper -->
 

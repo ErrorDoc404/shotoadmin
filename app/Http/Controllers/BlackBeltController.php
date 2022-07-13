@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlackBelt;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlackBeltController extends Controller
 {
@@ -14,7 +16,9 @@ class BlackBeltController extends Controller
      */
     public function index()
     {
-        $blackbelt = BlackBelt::all();
+        $blackbelt = BlackBelt::orderBy('id', 'asc')
+                    ->where('instructor','no')
+                    ->get();
         return view('blackbelt.index',compact('blackbelt'));
     }
 
@@ -25,7 +29,13 @@ class BlackBeltController extends Controller
      */
     public function create()
     {
-        return false;
+        $year = [];
+        $current_year = Carbon::now()->year;
+        for($i = $current_year ; $i >= 1950 ; $i-- ){
+            $year[] = $i;
+        }
+
+        return view('blackbelt.create',compact('year'));
     }
 
     /**
@@ -36,7 +46,22 @@ class BlackBeltController extends Controller
      */
     public function store(Request $request)
     {
-        return false;
+        $blackbelt = new BlackBelt();
+        $blackbelt->full_name = $request->fullname;
+        $blackbelt->dan_list_id = $request->dan;
+        $blackbelt->year = $request->year;
+
+//        if(Input::hasFile('name')){
+//
+//            $file = Input::file('name');
+//            $file->move('uploads/instructors', $file->getClientOriginalName());
+//            $blackbelt->image_url = 'uploads/instructors/'.$file->getClientOriginalName();
+//        }
+
+        $blackbelt->created_by = Auth::user()->name;
+        $blackbelt->modified_by = Auth::user()->name;
+        $blackbelt->save();
+        return redirect()->route('blackbelt');
     }
 
     /**
